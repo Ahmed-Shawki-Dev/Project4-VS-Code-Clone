@@ -1,14 +1,14 @@
-import FileNode from "./components/FileNode"
-import FolderNode from "./components/FolderNode"
+import FileNode from './components/FileNode'
+import { fileTree } from './data/fileTree'
 
 function App() {
   return (
     <>
- <FileNode filename="index.tsx"/>
-    <FolderNode foldername="node_modules"/>
+      {fileTree.children?.map(file =>{
+        return <FileNode filename={file.name} />
+      })}
     </>
   )
 }
 
 export default App
-
