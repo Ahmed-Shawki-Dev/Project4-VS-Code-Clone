@@ -5,6 +5,10 @@ export const fileTree: IFile = {
   isFolder: true,
   children: [
     {
+      name: 'index.html',
+      isFolder: false,
+    },
+    {
       name: 'node_modules',
       isFolder: true,
       children: [
@@ -23,10 +27,6 @@ export const fileTree: IFile = {
           ],
         },
       ],
-    },
-    {
-      name: 'index.html',
-      isFolder: false,
     },
   ],
 }
