@@ -1,7 +1,11 @@
-import { ChevronDown, ChevronRight, File, Folder } from 'lucide-react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuid } from 'uuid'
+import { setOpenedFiles } from '../app/feature/fileTreeSlice'
+import type { RootState } from '../app/store'
 import type { IFile } from '../interfaces'
+import GetExtension from './GetExtension'
 
 interface IProps {
   node: IFile
@@ -15,19 +19,37 @@ const FileNode = ({ node }: IProps) => {
     setIsOpen(prev => !prev)
   }
 
+  const hasRepeat = (openedFiles: IFile[], file: IFile) => {
+    if (openedFiles.includes(file)) {
+      return
+    } else {
+      dispatch(setOpenedFiles([...openedFiles, node]))
+    }
+  }
+
+  const dispatch = useDispatch()
+  const { openedFiles } = useSelector((state: RootState) => state.fileTree)
   return (
     <div className="ml-5">
       <div className="flex flex-row space-x-1 space-y-2">
         <span>
           {node.isFolder ? (
-            <div className="flex ml-[-23px]" onClick={toggle}>
-              {isOpen ? <ChevronDown /> : <ChevronRight />}
-              <Folder />
+            <div className="flex ml-[-23px] cursor-pointer" onClick={toggle}>
+              {isOpen ? (
+                <ChevronDown className="select-none" />
+              ) : (
+                <ChevronRight className="select-none" />
+              )}
+              <GetExtension
+                Name={node.name}
+                isOpen={isOpen}
+                isFolder={node.isFolder}
+              />
               <span className="select-none">{node.name}</span>
             </div>
           ) : (
-            <div className="flex">
-              <File />
+            <div className="flex cursor-pointer" onClick={() => hasRepeat(openedFiles, node)}>
+              <GetExtension Name={node.name} />
               <span className="select-none">{node.name}</span>
             </div>
           )}
