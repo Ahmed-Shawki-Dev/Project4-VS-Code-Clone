@@ -29,6 +29,7 @@ const FileNode = ({ node }: IProps) => {
 
   const dispatch = useDispatch()
   const { openedFiles } = useSelector((state: RootState) => state.fileTree)
+
   return (
     <div className="ml-5">
       <div className="flex flex-row space-x-1 space-y-2">
@@ -48,7 +49,10 @@ const FileNode = ({ node }: IProps) => {
               <span className="select-none">{node.name}</span>
             </div>
           ) : (
-            <div className="flex cursor-pointer" onClick={() => hasRepeat(openedFiles, node)}>
+            <div
+              className="flex cursor-pointer"
+              onClick={() => hasRepeat(openedFiles, node)}
+            >
               <GetExtension Name={node.name} />
               <span className="select-none">{node.name}</span>
             </div>
