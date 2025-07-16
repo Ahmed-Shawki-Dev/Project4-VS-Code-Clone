@@ -42,6 +42,7 @@ export const fileTree: IFile = {
               id: uuid(),
               name: 'vite.js',
               isFolder: false,
+              content: "Hello World!"
             },
           ],
         },
