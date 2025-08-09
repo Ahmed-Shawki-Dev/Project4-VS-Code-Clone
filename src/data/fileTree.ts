@@ -15,6 +15,7 @@ export const fileTree: IFile = {
           id: uuid(),
           name: 'vite.svg',
           isFolder: false,
+          content: '<svg><!-- Vite logo --></svg>',
         },
       ],
     },
@@ -22,6 +23,16 @@ export const fileTree: IFile = {
       id: uuid(),
       name: 'index.ts',
       isFolder: false,
+      content: `import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)`,
     },
     {
       id: uuid(),
@@ -32,6 +43,7 @@ export const fileTree: IFile = {
           id: uuid(),
           name: 'react.js',
           isFolder: false,
+          content: '// React core library (mocked)',
         },
         {
           id: uuid(),
@@ -42,7 +54,20 @@ export const fileTree: IFile = {
               id: uuid(),
               name: 'vite.js',
               isFolder: false,
-              content: "Hello World!"
+              content: `import SyntaxHighlighter from 'react-syntax-highlighter'
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+
+interface IProps {
+  content: string
+}
+
+const CodeComponent = ({ content }: IProps) => {
+  return (
+    <SyntaxHighlighter language="javascript" style={docco}>
+      {String(content)}
+    </SyntaxHighlighter>
+  )
+}`,
             },
           ],
         },

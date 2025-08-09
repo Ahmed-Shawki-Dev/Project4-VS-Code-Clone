@@ -12,6 +12,7 @@ interface IProps {
 }
 
 const FileNode = ({ node }: IProps) => {
+  const dispatch = useDispatch()
   // * States
   const [isOpen, setIsOpen] = useState(true)
   // * Handlers
@@ -33,7 +34,6 @@ const FileNode = ({ node }: IProps) => {
     }
   }
 
-  const dispatch = useDispatch()
   const { openedFiles } = useSelector((state: RootState) => state.fileTree)
 
   return (
